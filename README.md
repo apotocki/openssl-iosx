@@ -9,7 +9,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Manually
 ```
     # clone the repo
-    git clone -b 1.1.1i1 https://github.com/apotocki/openssl-iosx
+    git clone -b 1.1.1i.1 https://github.com/apotocki/openssl-iosx
     
     # build libraries
     cd openssl-iosx
@@ -20,9 +20,9 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '1.1.1i1' 
+    pod 'openssl-iosx', '1.1.1i.1' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :branch => '1.1.1i1'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :branch => '1.1.1i.1'
 ```    
 install new dependency:
 ```
