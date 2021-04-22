@@ -1,9 +1,9 @@
 ## OpenSSL for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported versions: 1.1.1j, 1.1.1i (use the appropriate tag to select the version)
+Supported versions: 1.1.1k, 1.1.1j, 1.1.1i (use the appropriate tag to select the version)
 
 This repo provides a universal script for building static OpenSSL libraries for use in iOS and Mac OS X applications.
-The actual library version is taken from https://github.com/openssl/openssl with tag 'OpenSSL_1_1_1i'
+The actual library version is taken from https://github.com/openssl/openssl with an appropriate tag like 'OpenSSL_1_1_1k'
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
