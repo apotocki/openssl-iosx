@@ -5,7 +5,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=OpenSSL_1_1_1i
+OPENSSL_VER=OpenSSL_1_1_1j
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -28,6 +28,10 @@ fi
 
 echo building $OPENSSL_VER "(-j$THREAD_COUNT)" ...
 pushd $OPENSSL_VER_NAME
+
+if [ -d $BUILD_DIR/build ]; then
+	rm -rf $BUILD_DIR/build
+fi
 
 if [ ! -d $BUILD_DIR/build/lib ]; then
 ./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$HOST_ARC-cc
