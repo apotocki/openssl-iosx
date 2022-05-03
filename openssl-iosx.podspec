@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "openssl-iosx"
-    s.version      = "1.1.1l.1"
+    s.version      = "1.1.1o.1"
     s.summary      = "OpenSSL"
     s.homepage     = "https://github.com/apotocki/openssl-iosx"
     s.license      = "Apache"
