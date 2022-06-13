@@ -52,20 +52,43 @@ cp libcrypto.a $BUILD_DIR/build/lib.catalyst/
 make clean
 fi
 
-if [ ! -d $BUILD_DIR/build/lib.iossim ]; then
+if [ ! -d $BUILD_DIR/build/lib.iossim_host ]; then
 ./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun
 make clean
 make -j$THREAD_COUNT
 
-mkdir $BUILD_DIR/build/lib.iossim
-cp libssl.a $BUILD_DIR/build/lib.iossim/
-cp libcrypto.a $BUILD_DIR/build/lib.iossim/
+mkdir $BUILD_DIR/build/lib.iossim_host
+cp libssl.a $BUILD_DIR/build/lib.iossim_host/
+cp libcrypto.a $BUILD_DIR/build/lib.iossim_host/
 make clean
 fi
 
+if [ -d $BUILD_DIR/build/lib.iossim ]; then
+	rm -rf $BUILD_DIR/build/lib.iossim
+fi
+mkdir $BUILD_DIR/build/lib.iossim
+
+if [ $HOST_ARC == "arm64" ]; then
+if [ ! -d $BUILD_DIR/build/lib.iossim_x86_64 ]; then
+./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch x86_64"
+make clean
+make -j$THREAD_COUNT
+
+mkdir $BUILD_DIR/build/lib.iossim_x86_64
+cp libssl.a $BUILD_DIR/build/lib.iossim_x86_64/
+cp libcrypto.a $BUILD_DIR/build/lib.iossim_x86_64/
+make clean
+fi
+
+lipo -create $BUILD_DIR/build/lib.iossim_x86_64/libssl.a $BUILD_DIR/build/lib.iossim_host/libssl.a -output $BUILD_DIR/build/lib.iossim/libssl.a
+lipo -create $BUILD_DIR/build/lib.iossim_x86_64/libcrypto.a $BUILD_DIR/build/lib.iossim_host/libcrypto.a -output $BUILD_DIR/build/lib.iossim/libcrypto.a
+
+else
+	cp $BUILD_DIR/build/lib.iossim_host/*.a $BUILD_DIR/build/lib.iossim/
+fi
 
 if [ ! -d $BUILD_DIR/build/lib.ios ]; then
-./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared no-dso no-hw no-engine ios64-xcrun -fembed-bitcode
+./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared no-dso no-hw no-engine ios64-xcrun -fembed-bitcode -mios-version-min=13.4
 make clean
 make -j$THREAD_COUNT
 
@@ -80,7 +103,6 @@ mkdir $BUILD_DIR/frameworks
 cp -R $BUILD_DIR/build/include $BUILD_DIR/frameworks/Headers
 
 xcodebuild -create-xcframework -library $BUILD_DIR/build/lib/libssl.a -library $BUILD_DIR/build/lib.catalyst/libssl.a -library $BUILD_DIR/build/lib.iossim/libssl.a -library $BUILD_DIR/build/lib.ios/libssl.a -output $BUILD_DIR/frameworks/ssl.xcframework
-
 xcodebuild -create-xcframework -library $BUILD_DIR/build/lib/libcrypto.a -library $BUILD_DIR/build/lib.catalyst/libcrypto.a -library $BUILD_DIR/build/lib.iossim/libcrypto.a -library $BUILD_DIR/build/lib.ios/libcrypto.a -output $BUILD_DIR/frameworks/crypto.xcframework
 
 popd
