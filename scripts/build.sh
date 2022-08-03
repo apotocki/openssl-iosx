@@ -5,7 +5,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=OpenSSL_1_1_1p
+OPENSSL_VER=OpenSSL_1_1_1q
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -26,8 +26,16 @@ if [ ! -d $OPENSSL_VER_NAME ]; then
 	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER_NAME
 fi
 
-echo building $OPENSSL_VER "(-j$THREAD_COUNT)" ...
+echo patching $OPENSSL_VER ...
 pushd $OPENSSL_VER_NAME
+if [ ! -f test/v3ext.c.orig ]; then
+	mv test/v3ext.c test/v3ext.c.orig 
+fi
+sed 's/#include <stdio.h>/#include <stdio.h>\n#include <string.h>/' test/v3ext.c.orig > test/v3ext.c
+
+
+echo building $OPENSSL_VER "(-j$THREAD_COUNT)" ...
+
 
 if [ -d $BUILD_DIR/build ]; then
 	rm -rf $BUILD_DIR/build
