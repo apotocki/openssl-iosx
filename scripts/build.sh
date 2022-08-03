@@ -5,7 +5,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=OpenSSL_1_1_1o
+OPENSSL_VER=OpenSSL_1_1_1p
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -41,25 +41,60 @@ make install
 make clean
 fi
 
-if [ ! -d $BUILD_DIR/build/lib.catalyst ]; then
+if [ $HOST_ARC == "arm64" ]; then
+    FOREIGN_ARCH=x86_64
+else
+    FOREIGN_ARCH=arm64
+fi
+
+if [ ! -d $BUILD_DIR/build/lib.catalyst-host ]; then
 ./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$HOST_ARC-cc --target=$BUILD_ARC-apple-ios13.4-macabi -isysroot $MACSYSROOT/SDKs/MacOSX.sdk -I$MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include -iframework $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/System/Library/Frameworks
 make clean
 make -j$THREAD_COUNT
 
-mkdir $BUILD_DIR/build/lib.catalyst
-cp libssl.a $BUILD_DIR/build/lib.catalyst/
-cp libcrypto.a $BUILD_DIR/build/lib.catalyst/
+mkdir $BUILD_DIR/build/lib.catalyst-host
+cp libssl.a $BUILD_DIR/build/lib.catalyst-host/
+cp libcrypto.a $BUILD_DIR/build/lib.catalyst-host/
 make clean
 fi
 
-if [ ! -d $BUILD_DIR/build/lib.iossim_host ]; then
+if [ ! -d $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH ]; then
+./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$FOREIGN_ARCH-cc --target=$FOREIGN_ARCH-apple-ios13.4-macabi -isysroot $MACSYSROOT/SDKs/MacOSX.sdk -I$MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include -iframework $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/System/Library/Frameworks
+make clean
+make -j$THREAD_COUNT
+
+mkdir $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH
+cp libssl.a $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH/
+cp libcrypto.a $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH/
+make clean
+fi
+
+if [ -d $BUILD_DIR/build/lib.catalyst ]; then
+	rm -rf $BUILD_DIR/build/lib.catalyst
+fi
+mkdir $BUILD_DIR/build/lib.catalyst
+lipo -create $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH/libssl.a $BUILD_DIR/build/lib.catalyst-host/libssl.a -output $BUILD_DIR/build/lib.catalyst/libssl.a
+lipo -create $BUILD_DIR/build/lib.catalyst-$FOREIGN_ARCH/libcrypto.a $BUILD_DIR/build/lib.catalyst-host/libcrypto.a -output $BUILD_DIR/build/lib.catalyst/libcrypto.a
+
+if [ ! -d $BUILD_DIR/build/lib.iossim-host ]; then
 ./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun
 make clean
 make -j$THREAD_COUNT
 
-mkdir $BUILD_DIR/build/lib.iossim_host
-cp libssl.a $BUILD_DIR/build/lib.iossim_host/
-cp libcrypto.a $BUILD_DIR/build/lib.iossim_host/
+mkdir $BUILD_DIR/build/lib.iossim-host
+cp libssl.a $BUILD_DIR/build/lib.iossim-host/
+cp libcrypto.a $BUILD_DIR/build/lib.iossim-host/
+make clean
+fi
+
+if [ ! -d $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH ]; then
+./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch $FOREIGN_ARCH"
+make clean
+make -j$THREAD_COUNT
+
+mkdir $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH
+cp libssl.a $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH/
+cp libcrypto.a $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH/
 make clean
 fi
 
@@ -67,25 +102,9 @@ if [ -d $BUILD_DIR/build/lib.iossim ]; then
 	rm -rf $BUILD_DIR/build/lib.iossim
 fi
 mkdir $BUILD_DIR/build/lib.iossim
+lipo -create $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH/libssl.a $BUILD_DIR/build/lib.iossim-host/libssl.a -output $BUILD_DIR/build/lib.iossim/libssl.a
+lipo -create $BUILD_DIR/build/lib.iossim-$FOREIGN_ARCH/libcrypto.a $BUILD_DIR/build/lib.iossim-host/libcrypto.a -output $BUILD_DIR/build/lib.iossim/libcrypto.a
 
-if [ $HOST_ARC == "arm64" ]; then
-if [ ! -d $BUILD_DIR/build/lib.iossim_x86_64 ]; then
-./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch x86_64"
-make clean
-make -j$THREAD_COUNT
-
-mkdir $BUILD_DIR/build/lib.iossim_x86_64
-cp libssl.a $BUILD_DIR/build/lib.iossim_x86_64/
-cp libcrypto.a $BUILD_DIR/build/lib.iossim_x86_64/
-make clean
-fi
-
-lipo -create $BUILD_DIR/build/lib.iossim_x86_64/libssl.a $BUILD_DIR/build/lib.iossim_host/libssl.a -output $BUILD_DIR/build/lib.iossim/libssl.a
-lipo -create $BUILD_DIR/build/lib.iossim_x86_64/libcrypto.a $BUILD_DIR/build/lib.iossim_host/libcrypto.a -output $BUILD_DIR/build/lib.iossim/libcrypto.a
-
-else
-	cp $BUILD_DIR/build/lib.iossim_host/*.a $BUILD_DIR/build/lib.iossim/
-fi
 
 if [ ! -d $BUILD_DIR/build/lib.ios ]; then
 ./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared no-dso no-hw no-engine ios64-xcrun -fembed-bitcode -mios-version-min=13.4
