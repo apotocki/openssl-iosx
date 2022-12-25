@@ -5,12 +5,11 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=OpenSSL_1_1_1s
+OPENSSL_VER=openssl-3.0.7
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
 MACSYSROOT=$XCODE_ROOT/Platforms/MacOSX.platform/Developer
-OPENSSL_VER_NAME=${OPENSSL_VER//.//-}
 BUILD_DIR="$( cd "$( dirname "./" )" >/dev/null 2>&1 && pwd )"
 
 if [ "$HOST_ARC" = "arm64" ]; then
@@ -22,12 +21,12 @@ fi
 
 if [[ ! -d $BUILD_DIR/frameworks ]]; then
 
-if [[ ! -d $OPENSSL_VER_NAME ]]; then
+if [[ ! -d $OPENSSL_VER ]]; then
 	echo downloading $OPENSSL_VER ...
-	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER_NAME
+	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER
 fi
 
-pushd $OPENSSL_VER_NAME
+pushd $OPENSSL_VER
 
 function arc()
 {
