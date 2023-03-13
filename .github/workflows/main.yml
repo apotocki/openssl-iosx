@@ -15,7 +15,7 @@ jobs:
     - name: Build
       run: |
         scripts/build.sh
-        for i in frameworks/*.xcframework/; do cd frameworks && zip -9 -r -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
+        for i in frameworks/*.xcframework/; do cd frameworks && zip -9 -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
         cd frameworks
         mv Headers include
         zip -9 -r include.zip include
