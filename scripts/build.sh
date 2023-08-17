@@ -5,7 +5,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=OpenSSL_1_1_1t
+OPENSSL_VER=OpenSSL_1_1_1v
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
@@ -58,7 +58,7 @@ build_catalyst_libs()
 build_sim_libs()
 {
 	if [[ ! -d $BUILD_DIR/build/lib.iossim-$1 ]]; then
-		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch $1"
+		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch $1 -mios-simulator-version-min=13.4"
 		make clean
 		make -j$THREAD_COUNT
 
