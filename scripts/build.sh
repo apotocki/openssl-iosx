@@ -57,7 +57,7 @@ build_catalyst_libs()
 build_sim_libs()
 {
 	if [[ ! -d $BUILD_DIR/build/lib.iossim-$1 ]]; then
-		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch $1"
+		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared iossimulator-xcrun CFLAGS="-arch $1 -mios-simulator-version-min=13.4"
 		make clean
 		make -j$THREAD_COUNT
 
