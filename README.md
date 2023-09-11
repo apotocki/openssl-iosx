@@ -1,6 +1,6 @@
 ## OpenSSL for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported version: 1.1.1v
+Supported version: 1.1.1w
 
 This repo provides a universal script for building static OpenSSL libraries for use in iOS and Mac OS X applications.
 The actual library version is taken from https://github.com/openssl/openssl with tag 'OpenSSL_1_1_1u'
@@ -14,7 +14,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Manually
 ```
     # clone the repo
-    git clone -b 1.1.1v https://github.com/apotocki/openssl-iosx
+    git clone -b 1.1.1w https://github.com/apotocki/openssl-iosx
     
     # build libraries
     cd openssl-iosx
@@ -25,9 +25,9 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 1.1.1v' 
+    pod 'openssl-iosx', '~> 1.1.1w' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '1.1.1v.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '1.1.1w.0'
 ```    
 install new dependency:
 ```
