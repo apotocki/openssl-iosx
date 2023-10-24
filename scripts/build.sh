@@ -5,7 +5,7 @@ set -e
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=openssl-3.1.3
+OPENSSL_VER=openssl-3.1.4
 ################## SETUP END
 #DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
 #SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
