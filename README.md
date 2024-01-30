@@ -1,6 +1,6 @@
 ## OpenSSL for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported 3.2.X versions: 3.2.0
+Supported 3.2.X versions: 3.2.1, 3.2.0
 
 Supported 3.1.X versions: 3.1.5, 3.1.4, 3.1.3, 3.1.2, 3.1.1, 3.1.0
 
@@ -34,9 +34,9 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.2.0'
+    pod 'openssl-iosx', '~> 3.2.1'
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.2.0.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.2.1.0'
 ```    
 install new dependency:
 ```
