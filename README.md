@@ -37,7 +37,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
     use_frameworks!
     pod 'openssl-iosx', '~> 3.2.1'
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.2.1.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.2.1.1'
 ```    
 install new dependency:
 ```
