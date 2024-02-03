@@ -6,28 +6,45 @@ THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
 OPENSSL_VER=OpenSSL_1_1_1w
+#MACOSX_VERSION_ARM=12.3
+#MACOSX_VERSION_X86_64=10.13
 ################## SETUP END
-#DEVSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
-#SIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
+#IOSSYSROOT=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer
+#IOSSIMSYSROOT=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer
 MACSYSROOT=$XCODE_ROOT/Platforms/MacOSX.platform/Developer
-OPENSSL_VER_NAME=${OPENSSL_VER//.//-}
+XROSSYSROOT=$XCODE_ROOT/Platforms/XROS.platform/Developer
+XROSSIMSYSROOT=$XCODE_ROOT/Platforms/XRSimulator.platform/Developer
+
 BUILD_DIR="$( cd "$( dirname "./" )" >/dev/null 2>&1 && pwd )"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [ "$HOST_ARC" = "arm64" ]; then
 	FOREIGN_ARC=x86_64
+    FOREIGN_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_X86_64}" ] && FOREIGN_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_X86_64"
+    NATIVE_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_ARM}" ] && NATIVE_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_ARM"
 else
 	FOREIGN_ARC=arm64
+    FOREIGN_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_ARM}" ] && FOREIGN_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_ARM"
+    NATIVE_BUILD_FLAGS="" && [ ! -z "${MACOSX_VERSION_X86_64}" ] && NATIVE_BUILD_FLAGS="-mmacosx-version-min=$MACOSX_VERSION_X86_64"
 fi
-
+FOREIGN_BUILD_FLAGS="-arch $FOREIGN_ARC $FOREIGN_BUILD_FLAGS"
 
 if [[ ! -d $BUILD_DIR/frameworks ]]; then
 
-if [[ ! -d $OPENSSL_VER_NAME ]]; then
+if [[ ! -d $OPENSSL_VER ]]; then
 	echo downloading $OPENSSL_VER ...
-	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER_NAME
+	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER
 fi
 
-pushd $OPENSSL_VER_NAME
+pushd $OPENSSL_VER
+
+echo patching openssl...
+if [ ! -f Configurations/15-ios.conf.orig ]; then
+	cp -f Configurations/15-ios.conf Configurations/15-ios.conf.orig
+else
+	cp -f Configurations/15-ios.conf.orig Configurations/15-ios.conf
+fi
+patch Configurations/15-ios.conf $SCRIPT_DIR/15-ios.conf.patch
 
 function arc()
 {
@@ -44,7 +61,6 @@ build_catalyst_libs()
 {
 	if [[ ! -d $BUILD_DIR/build/lib.catalyst-$1 ]]; then
 		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$1-cc --target=$(arc $1)-apple-ios13.4-macabi -isysroot $MACSYSROOT/SDKs/MacOSX.sdk
-		# -I$MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include/ -isystem $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/usr/include -iframework $MACSYSROOT/SDKs/MacOSX.sdk/System/iOSSupport/System/Library/Frameworks
 		make clean
 		make -j$THREAD_COUNT
 
@@ -69,6 +85,20 @@ build_sim_libs()
 	fi
 }
 
+build_xrossim_libs()
+{
+	if [[ ! -d $BUILD_DIR/build/lib.xrossim-$1 ]]; then
+		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared xrossimulator-xcrun CFLAGS="-arch $1"
+		make clean
+		make -j$THREAD_COUNT
+
+		mkdir $BUILD_DIR/build/lib.xrossim-$1
+		cp libssl.a $BUILD_DIR/build/lib.xrossim-$1/
+		cp libcrypto.a $BUILD_DIR/build/lib.xrossim-$1/
+		make clean
+	fi
+}
+
 build_ios_libs()
 {
 	if [[ ! -d $BUILD_DIR/build/lib.ios ]]; then
@@ -83,15 +113,29 @@ build_ios_libs()
 	fi
 }
 
+build_xros_libs()
+{
+	if [[ ! -d $BUILD_DIR/build/lib.xros ]]; then
+		./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared no-dso no-hw no-engine xros-xcrun -fembed-bitcode
+		make clean
+		make -j$THREAD_COUNT
+
+		mkdir $BUILD_DIR/build/lib.xros
+		cp libssl.a $BUILD_DIR/build/lib.xros/
+		cp libcrypto.a $BUILD_DIR/build/lib.xros/
+		make clean
+	fi
+}
+
 if [[ ! -d $BUILD_DIR/build/lib ]]; then
-	./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$HOST_ARC-cc
+	./Configure --prefix="$BUILD_DIR/build" --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$HOST_ARC-cc CFLAGS="$NATIVE_BUILD_FLAGS"
 	make clean
 	make -j$THREAD_COUNT
 	make install
 	make clean
 fi
 if [[ ! -d $BUILD_DIR/build/lib.macos ]]; then
-	./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$FOREIGN_ARC-cc CFLAGS="-arch $FOREIGN_ARC"
+	./Configure --openssldir="$BUILD_DIR/build/ssl" no-shared darwin64-$FOREIGN_ARC-cc CFLAGS="$FOREIGN_BUILD_FLAGS"
 	make clean
 	make -j$THREAD_COUNT
 
@@ -118,14 +162,43 @@ if [[ ! -d $BUILD_DIR/build/lib.iossim ]]; then
 	lipo -create $BUILD_DIR/build/lib.iossim-x86_64/libcrypto.a $BUILD_DIR/build/lib.iossim-arm64/libcrypto.a -output $BUILD_DIR/build/lib.iossim/libcrypto.a
 fi
 
+if [ -d $XROSSIMSYSROOT/SDKs/XRSimulator.sdk ]; then
+if [[ ! -d $BUILD_DIR/build/lib.xrossim ]]; then
+	build_xrossim_libs arm64
+	build_xrossim_libs x86_64
+	mkdir $BUILD_DIR/build/lib.xrossim
+	lipo -create $BUILD_DIR/build/lib.xrossim-x86_64/libssl.a $BUILD_DIR/build/lib.xrossim-arm64/libssl.a -output $BUILD_DIR/build/lib.xrossim/libssl.a
+	lipo -create $BUILD_DIR/build/lib.xrossim-x86_64/libcrypto.a $BUILD_DIR/build/lib.xrossim-arm64/libcrypto.a -output $BUILD_DIR/build/lib.xrossim/libcrypto.a
+fi
+fi
+
 build_ios_libs
+if [ -d $XROSSYSROOT ]; then
+    build_xros_libs
+fi
 
 mkdir $BUILD_DIR/frameworks
 
 cp -R $BUILD_DIR/build/include $BUILD_DIR/frameworks/Headers
 
-xcodebuild -create-xcframework -library $BUILD_DIR/build/lib.macos/libssl.a -library $BUILD_DIR/build/lib.catalyst/libssl.a -library $BUILD_DIR/build/lib.iossim/libssl.a -library $BUILD_DIR/build/lib.ios/libssl.a -output $BUILD_DIR/frameworks/ssl.xcframework
-xcodebuild -create-xcframework -library $BUILD_DIR/build/lib.macos/libcrypto.a -library $BUILD_DIR/build/lib.catalyst/libcrypto.a -library $BUILD_DIR/build/lib.iossim/libcrypto.a -library $BUILD_DIR/build/lib.ios/libcrypto.a -output $BUILD_DIR/frameworks/crypto.xcframework
+create_xcframework()
+{
+    LIBARGS="-library $BUILD_DIR/build/lib.macos/lib$1.a \
+        -library $BUILD_DIR/build/lib.catalyst/lib$1.a \
+        -library $BUILD_DIR/build/lib.iossim/lib$1.a \
+        -library $BUILD_DIR/build/lib.ios/lib$1.a"
+        
+    if [ -d $XROSSIMSYSROOT/SDKs/XRSimulator.sdk ]; then
+        LIBARGS="$LIBARGS -library $BUILD_DIR/build/lib.xrossim/lib$1.a"
+    fi
+    if [ -d $XROSSYSROOT/SDKs/XROS.sdk ]; then
+        LIBARGS="$LIBARGS -library $BUILD_DIR/build/lib.xros/lib$1.a"
+    fi
+    xcodebuild -create-xcframework $LIBARGS -output "$BUILD_DIR/frameworks/$1.xcframework"
+}
+
+create_xcframework ssl
+create_xcframework crypto
 
 popd
 
