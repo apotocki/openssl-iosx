@@ -1,0 +1,25 @@
+@@ -34,6 +34,24 @@
+         inherit_from     => [ "ios-common" ],
+         CC               => "xcrun -sdk iphonesimulator cc",
+     },
++    "xros-common" => {
++        template         => 1,
++        inherit_from     => [ "darwin-common" ],
++        sys_id           => "visionOS",
++        disable          => [ "shared", "async" ],
++    },
++    "xros-xcrun" => {
++        inherit_from     => [ "xros-common" ],
++        CC               => "xcrun -sdk xros cc",
++        cflags           => add("-arch arm64 -fno-common"),
++        bn_ops           => "SIXTY_FOUR_BIT_LONG RC4_CHAR",
++        asm_arch         => 'aarch64',
++        perlasm_scheme   => "ios64",
++    },
++    "xrossimulator-xcrun" => {
++        inherit_from     => [ "xros-common" ],
++        CC               => "xcrun -sdk xrsimulator cc",
++    },
+ # It takes three prior-set environment variables to make it work:
+ #
+ # CROSS_COMPILE=/where/toolchain/is/usr/bin/ [note ending slash]

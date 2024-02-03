@@ -1,14 +1,15 @@
-## OpenSSL for iOS and Mac OS X (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
+## OpenSSL for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
 Supported version: 3.1.5
 
-This repository provides a universal script for building static OpenSSL libraries for use in iOS and macOS applications.
+This repository provides a universal script for building static OpenSSL libraries for use in iOS, visionOS, and macOS & Catalyst applications.
 The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.1.5'
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
   2) ```xcode-select -p``` must point to Xcode app developer directory (by default e.g. /Applications/Xcode.app/Contents/Developer). If it points to CommandLineTools directory you should execute:
   ```sudo xcode-select --reset``` or ```sudo xcode-select -s /Applications/Xcode.app/Contents/Developer```
+  3) For the creation of visionOS related artifacts and their integration into the resulting xcframeworks, XROS.platform and XRSimulator.platform should be available in the folder: /Applications/Xcode.app/Contents/Developer/Platforms
 
 ## How to build?
  - Manually
@@ -27,7 +28,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
     use_frameworks!
     pod 'openssl-iosx', '~> 3.1.5' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.1.5.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.1.5.1'
 ```    
 install new dependency:
 ```
