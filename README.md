@@ -37,9 +37,9 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.3.1'
+    pod 'openssl-iosx', '~> 3.0.15'
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.3.1.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.0.15.0'
 ```    
 install new dependency:
 ```
