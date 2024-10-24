@@ -1,9 +1,9 @@
 ## OpenSSL for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
-Supported version: 3.3.2
+Supported version: 3.4.0
 
 This repository provides a universal script for building static OpenSSL libraries for use in iOS, visionOS, and macOS & Catalyst applications.
-The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.3.2'
+The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.4.0'
 
 ## Prerequisites
   1) Xcode must be installed because xcodebuild is used to create xcframeworks
@@ -15,7 +15,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Manually
 ```
     # clone the repo
-    git clone -b 3.3.2 https://github.com/apotocki/openssl-iosx
+    git clone -b 3.4.0 https://github.com/apotocki/openssl-iosx
     
     # build libraries
     cd openssl-iosx
@@ -26,9 +26,9 @@ The actual library version is taken from https://github.com/openssl/openssl with
  - Use cocoapods. Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.3.2' 
+    pod 'openssl-iosx', '~> 3.4.0' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.3.2.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.4.0.0'
 ```    
 install new dependency:
 ```
