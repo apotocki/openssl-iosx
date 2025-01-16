@@ -1,4 +1,5 @@
-[<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="20">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yeq7CsN3MnkJYXpqw/ZgWXGvGldf5mc7pFqGguCTLrONQaTbQ9g6ppHEFVIimy06SmuT2UWmJV/7Hz9mrYwuv88TiwnM//EfGTu0Q4v5lmOHgYunZszy6YsOwViI8byUXBg==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="40">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yeq7CsN3MnkJYXpqw/ZgWXGvGldf5mc7pFqGguCTLrONQaTbQ9g6ppHEFVIimy06SmuT2UWmJV/7Hz9mrYwuv88TiwnM//EfGTu0Q4v5lmOHgYunZszy6YsOwViI8byUXBg==)
+[<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="40">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yeq7CsN3MnkJYXpqw/ZgWXGvGldf5mc7pFqGguCTLrONQaTbQ9g6ppHEFVIimy06SmuT2UWmJV/7Hz9mrYwuv88TiwnM//EfGTu0Q4v5lmOHgYunZszy6YsOwViI8byUXBg==)
 
 ## OpenSSL for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
