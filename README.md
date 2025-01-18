@@ -1,5 +1,4 @@
 [<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="50">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yejULvHntzJV39eKpgyDXlxMDeRKfRgTXBnp24UT0aohucuOue6QQIj1o3sIHMiXZDcohgcSfIL13KS2X8SzEAljxhOoPOa+hY65B0F/xEvRclBtUeCvEKLRSLHtnWv+HbA==)
-[<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="50">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yejULvHntzJV39eKpgyDXlxMDeRKfRgTXBnp24UT0aohucuOue6QQIj1o3sIHMiXZDcohgcSfIL13KS2X8SzEAljxhOoPOa+hY65B0F/xEvRclBtUeCvEKLRSLHtnWv+HbA==)
 
 ## OpenSSL for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
 
