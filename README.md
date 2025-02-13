@@ -6,7 +6,7 @@ Supported 3.4.X versions: 3.4.0
 
 Supported 3.3.X versions: 3.3.2, 3.3.1, 3.3.0
 
-Supported 3.2.X versions: 3.2.3, 3.2.2, 3.2.1, 3.2.0
+Supported 3.2.X versions: 3.2.4, 3.2.3, 3.2.2, 3.2.1, 3.2.0
 
 Supported 3.1.X versions: 3.1.8, 3.1.7, 3.1.6, 3.1.5, 3.1.4, 3.1.3, 3.1.2, 3.1.1, 3.1.0
 
