@@ -151,7 +151,6 @@ generic_build()
         mkdir $BUILD_DIR/build.$1.$2
         pushd $BUILD_DIR/build.$1.$2
         ../$OPENSSL_VER/Configure --openssldir="$BUILD_DIR/build.$1.$2/ssl" no-shared $3 CFLAGS="${4:-}"
-        sed -i '' 's/LIBS=apps\/libapps.a /LIB=/g' Makefile
         make -j$THREAD_COUNT build_libs
         popd
         touch $BUILD_DIR/build.$1.$2.success
