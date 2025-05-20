@@ -1,4 +1,4 @@
-@@ -32,6 +32,23 @@
+@@ -32,6 +32,57 @@
          inherit_from     => [ "ios-common" ],
          CC               => "xcrun -sdk iphonesimulator cc",
      },
@@ -18,6 +18,40 @@
 +    "xrossimulator-xcrun" => {
 +        inherit_from     => [ "xros-common" ],
 +        CC               => "xcrun -sdk xrsimulator cc",
++    },
++    "tvos-common" => {
++        template         => 1,
++        inherit_from     => [ "darwin-common" ],
++        sys_id           => "tvOS",
++        disable          => [ "engine", "async" ],
++    },
++    "tvos-xcrun" => {
++        inherit_from     => [ "tvos-common", asm("aarch64_asm") ],
++        CC               => "xcrun -sdk appletvos cc",
++        cflags           => add("-arch arm64 -fno-common"),
++        bn_ops           => "SIXTY_FOUR_BIT_LONG RC4_CHAR",
++        perlasm_scheme   => "ios64",
++    },
++    "tvossimulator-xcrun" => {
++        inherit_from     => [ "tvos-common" ],
++        CC               => "xcrun -sdk appletvsimulator cc",
++    },
++    "watchos-common" => {
++        template         => 1,
++        inherit_from     => [ "darwin-common" ],
++        sys_id           => "watchOS",
++        disable          => [ "engine", "async" ],
++    },
++    "watchos-xcrun" => {
++        inherit_from     => [ "watchos-common", asm("aarch64_asm") ],
++        CC               => "xcrun -sdk watchos cc",
++        cflags           => add("-arch arm64 -fno-common"),
++        bn_ops           => "SIXTY_FOUR_BIT_LONG RC4_CHAR",
++        perlasm_scheme   => "ios64",
++    },
++    "watchossimulator-xcrun" => {
++        inherit_from     => [ "watchos-common" ],
++        CC               => "xcrun -sdk watchsimulator cc",
 +    },
  # It takes three prior-set environment variables to make it work:
  #
