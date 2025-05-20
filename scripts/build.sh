@@ -151,6 +151,7 @@ generic_build()
         mkdir $BUILD_DIR/build.$1.$2
         pushd $BUILD_DIR/build.$1.$2
         ../$OPENSSL_VER/Configure --openssldir="$BUILD_DIR/build.$1.$2/ssl" no-shared $3 CFLAGS="${4:-}"
+        sed -i '' 's/LIBS=apps\/libapps.a /LIB=/g' Makefile
         make -j$THREAD_COUNT build_libs
         popd
         touch $BUILD_DIR/build.$1.$2.success
@@ -226,10 +227,10 @@ fi
 [[ "$BUILD_PLATFORMS" == *tvossim* ]] && build_tvossim_libs
 [[ "$BUILD_PLATFORMS" == *watchossim* ]] && build_watchossim_libs
 
-[[ "$BUILD_PLATFORMS" == *"ios "* ]] && generic_build ios arm64 ios64-xcrun "-mios-version-min=$IOS_VERSION"
-[[ "$BUILD_PLATFORMS" == *"xros "* ]] && generic_build xros arm64 xros-xcrun
-[[ "$BUILD_PLATFORMS" == *"tvos "* ]] && generic_build tvos arm64 tvos-xcrun "-target arm64-apple-tvos$TVOS_VERSION"
-[[ "$BUILD_PLATFORMS" == *"watchos "* ]] && generic_build watchos arm64 watchos-xcrun "-target arm64-apple-watchos$WATCHOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"ios "* ]] && generic_build ios arm64 ios64-xcrun "-fembed-bitcode -mios-version-min=$IOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"xros "* ]] && generic_build xros arm64 xros-xcrun "-fembed-bitcode"
+[[ "$BUILD_PLATFORMS" == *"tvos "* ]] && generic_build tvos arm64 tvos-xcrun "-fembed-bitcode -target arm64-apple-tvos$TVOS_VERSION"
+[[ "$BUILD_PLATFORMS" == *"watchos "* ]] && generic_build watchos arm64 watchos-xcrun "-fembed-bitcode -target arm64-apple-watchos$WATCHOS_VERSION"
 
 build_xcframework()
 {
