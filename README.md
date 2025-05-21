@@ -66,7 +66,7 @@ Add the following lines into your project's Podfile:
     use_frameworks!
     pod 'openssl-iosx', '~> 1.1.1w' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '1.1.1w.2'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '1.1.1w.3'
 ```    
 install new dependency:
 ```
