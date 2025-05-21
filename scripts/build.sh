@@ -119,7 +119,7 @@ function arc()
 	fi
 }
 
-LIBS_TO_BUILD="ssl crypto"
+LIBS_TO_BUILD="ssl crypto apps"
 build_libs()
 {
     [[ -d $BUILD_DIR/build.$1 ]] && rm -rf $BUILD_DIR/build.$1
@@ -145,14 +145,19 @@ build_libs()
 # (type, arc, c, cflags)
 generic_build()
 {
-    if [[ $REBUILD == true ]] || [[ ! -d $BUILD_DIR/build.$1.$2 ]] || [[ ! -f $BUILD_DIR/build.$1.$2.success ]]; then
+    if [[ $REBUILD == true ]] || [[ ! -f $BUILD_DIR/build.$1.$2.success ]] || [[ ! -f $BUILD_DIR/build.$1.$2/libssl.a ]] || [[ ! -f $BUILD_DIR/build.$1.$2/libcrypto.a ]] || [[ ! -f $BUILD_DIR/build.$1.$2/libapps.a ]]; then
         [[ -f $BUILD_DIR/build.$1.$2.success ]] && rm $BUILD_DIR/build.$1.$2.success
         [[ -d $BUILD_DIR/build.$1.$2 ]] && rm -rf $BUILD_DIR/build.$1.$2
         mkdir $BUILD_DIR/build.$1.$2
         pushd $BUILD_DIR/build.$1.$2
         ../$OPENSSL_VER/Configure --openssldir="$BUILD_DIR/build.$1.$2/ssl" no-shared $3 CFLAGS="${4:-}"
-        sed -i '' 's/LIBS=apps\/libapps.a /LIB=/g' Makefile
+        #remove 'fork()' dependence
+        if [[ "$1" == *tvos* ]] || [[ "$1" == *watchos* ]]; then
+            sed -i '' '/apps\/lib\/libapps-lib-http_server.o \\/d' Makefile
+            sed -i '' 's/apps\/lib\/libapps-lib-http_server.o '//g Makefile
+        fi
         make -j$THREAD_COUNT build_libs
+        mv apps/libapps.a ./
         popd
         touch $BUILD_DIR/build.$1.$2.success
     fi
@@ -197,13 +202,14 @@ build_watchossim_libs()
 # (arc, cflags)
 macosx_build()
 {
-if [[ $REBUILD == true ]] || [[ ! -d $BUILD_DIR/build.macosx.$1 ]] || [[ ! -f $BUILD_DIR/build.macosx.$1.success ]]; then
+if [[ $REBUILD == true ]] || [[ ! -f $BUILD_DIR/build.macosx.$1.success ]] || [[ ! -f $BUILD_DIR/build.macosx.$1/libssl.a ]] || [[ ! -f $BUILD_DIR/build.macosx.$1/libcrypto.a ]] || [[ ! -f $BUILD_DIR/build.macosx.$1/libapps.a ]]; then
     [[ -f $BUILD_DIR/build.macosx.$1.success ]] && rm $BUILD_DIR/build.macosx.$1.success
     [[ -d $BUILD_DIR/build.macosx.$1 ]] && rm -rf $BUILD_DIR/build.macosx.$1
     mkdir $BUILD_DIR/build.macosx.$1
     pushd $BUILD_DIR/build.macosx.$1
     ../$OPENSSL_VER/Configure --prefix="$BUILD_DIR/macosx-native" --openssldir="$BUILD_DIR/build.macosx.$1/ssl" no-shared darwin64-$1-cc CFLAGS="$2"
 	make -j$THREAD_COUNT
+    mv apps/libapps.a ./
     popd
     touch $BUILD_DIR/build.macosx.$1.success
 fi
