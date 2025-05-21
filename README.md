@@ -1,20 +1,32 @@
-[<img src="https://api.gitsponsors.com/api/badge/img?id=325850458" height="50">](https://api.gitsponsors.com/api/badge/link?p=Qf7dHIzVXuwETf3oKR9yejULvHntzJV39eKpgyDXlxMDeRKfRgTXBnp24UT0aohucuOue6QQIj1o3sIHMiXZDcohgcSfIL13KS2X8SzEAljxhOoPOa+hY65B0F/xEvRclBtUeCvEKLRSLHtnWv+HbA==)
 
-## OpenSSL for iOS, visionOS, macOS (Intel & Apple Silicon M1) & Catalyst - arm64 / x86_64
+## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
 Supported version: 3.1.8
 
-This repository provides a universal script for building static OpenSSL libraries for use in iOS, visionOS, and macOS & Catalyst applications.
+This repository provides a universal script for building static OpenSSL libraries for use in iOS, watchOS, tvOS, visionOS, and macOS & Catalyst applications.
 The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.1.8'
 
-## Prerequisites
-  1) Xcode must be installed because xcodebuild is used to create xcframeworks
-  2) ```xcode-select -p``` must point to Xcode app developer directory (by default e.g. /Applications/Xcode.app/Contents/Developer). If it points to CommandLineTools directory you should execute:
-  ```sudo xcode-select --reset``` or ```sudo xcode-select -s /Applications/Xcode.app/Contents/Developer```
-  3) For the creation of visionOS related artifacts and their integration into the resulting xcframeworks, XROS.platform and XRSimulator.platform should be available in the folder: /Applications/Xcode.app/Contents/Developer/Platforms
+# Prerequisites
 
-## How to build?
- - Manually
+1. **Install Xcode**: Ensure Xcode is installed, as `xcodebuild` is required to create `xcframeworks`.
+  
+2. **Verify Xcode Developer Directory**:
+   - The `xcode-select -p` command must point to the Xcode app's developer directory (e.g., `/Applications/Xcode.app/Contents/Developer`).
+   - If it points to the CommandLineTools directory, reset it using one of the following commands:
+     ```bash
+     sudo xcode-select --reset
+     ```
+     or
+     ```bash
+     sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+     ```
+
+3. **Install Required SDKs**: To build for tvOS, watchOS, visionOS, and their simulators, make sure the corresponding SDKs are installed in the folder:
+```
+   /Applications/Xcode.app/Contents/Developer/Platforms
+```
+
+# Build Manually
 ```
     # clone the repo
     git clone -b 3.1.8 https://github.com/apotocki/openssl-iosx
@@ -24,18 +36,42 @@ The actual library version is taken from https://github.com/openssl/openssl with
     scripts/build.sh
 
     # have fun, the result artifacts will be located in 'frameworks' folder.
-```    
- - Use cocoapods. Add the following lines into your project's Podfile:
+```
+## Selecting Platforms and Architectures
+
+build.sh without arguments builds xcframeworks for iOS, macOS, Catalyst and also for watchOS, tvOS, visionOS if their SDKs are installed on the system. It also builds xcframeworks for their simulators with the architecture (arm64 or x86_64) depending on the current host.
+If you are interested in a specific set of platforms and architectures, you can specify them explicitly using the -p argument, for example:
+```
+scripts/build.sh -p=ios,iossim-x86_64
+# builts xcframeworks only for iOS and iOS Simulator with x86_64 architecture
+```
+Here is a list of all possible values for '-p' option:
+```
+macosx,macosx-arm64,macosx-x86_64,macosx-both,ios,iossim,iossim-arm64,iossim-x86_64,iossim-both,catalyst,catalyst-arm64,catalyst-x86_64,catalyst-both,xros,xrossim,xrossim-arm64,xrossim-x86_64,xrossim-both,tvos,tvossim,tvossim-arm64,tvossim-x86_64,tvossim-both,watchos,watchossim,watchossim-arm64,watchossim-x86_64,watchossim-both
+```
+Suffix '-both' means that xcframeworks will be built for both arm64 and x86_64 architectures.
+The platform names for macosx and simulators without an architecture suffix (e.g. macosx, iossim, tvossim) mean that xcframeworks are only built for the current host architecture.
+
+## Rebuild option
+To rebuild the libraries without using the results of previous builds, use the --rebuild option
+```
+scripts/build.sh -p=ios,iossim-x86_64 --rebuild
+
+```
+
+# Build Using Cocoapods.
+
+Add the following lines into your project's Podfile:
 ```
     use_frameworks!
     pod 'openssl-iosx', '~> 3.1.8' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.1.8.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.1.8.1'
 ```    
 install new dependency:
 ```
    pod install --verbose
-```    
+```
 
 ## As an advertisement…
 Please check out my iOS application on the App Store:
