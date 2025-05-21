@@ -4,7 +4,7 @@ on:
     types: [published]
   push:
     tags:
-        - 3.**
+        - 3.4.1**
   workflow_dispatch:
 jobs:
   Build:
@@ -14,8 +14,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build
       run: |
-        scripts/build.sh
-        for i in frameworks/*.xcframework/; do cd frameworks && zip -9 -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
+        scripts/build.sh -p=macosx-both,ios,iossim-both,catalyst-both,xros,xrossim-both,watchos,watchossim-both,tvos,tvossim-both
+        for i in frameworks/*.xcframework/; do cd frameworks && zip -9 -r -r "$(basename -- $i).zip" $(basename -- $i) & done; wait
         cd frameworks
         mv Headers include
         zip -9 -r include.zip include
