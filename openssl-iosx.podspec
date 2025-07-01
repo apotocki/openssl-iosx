@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "openssl-iosx"
-    s.version      = "3.0.16.1"
+    s.version      = "3.0.17.0"
     s.summary      = "OpenSSL libraries for macOS, iOS, and visionOS, including both arm64 and x86_64 builds for macOS, Mac Catalyst, iOS Simulator, and visionOS Simulator."
     s.homepage     = "https://github.com/apotocki/openssl-iosx"
     s.license      = "Apache"
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     s.header_mappings_dir = "frameworks/Headers"
     s.public_header_files = "frameworks/Headers/**/*.{h,H,c}"
     s.source_files = "frameworks/Headers/**/*.{h,H,c}"
-    s.vendored_frameworks = "frameworks/ssl.xcframework", "frameworks/crypto.xcframework"
+    s.vendored_frameworks = "frameworks/ssl.xcframework", "frameworks/crypto.xcframework", "frameworks/apps.xcframework"
         
     #s.preserve_paths = "frameworks/**/*"
 end
