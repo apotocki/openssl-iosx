@@ -79,9 +79,9 @@ scripts/build.sh -p=ios,iossim-x86_64 --rebuild
 Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.5.0'
+    pod 'openssl-iosx', '~> 3.5.1'
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.5.0.1'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.5.1.0'
 ```    
 install new dependency:
 ```
