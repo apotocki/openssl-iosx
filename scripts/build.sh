@@ -6,7 +6,7 @@ set -euo pipefail
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=openssl-3.5.3
+OPENSSL_VER=openssl-3.6.0
 MACOSX_VERSION_ARM=12.3
 MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4

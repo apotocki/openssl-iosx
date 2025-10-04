@@ -1,6 +1,8 @@
 
 ## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
+Supported 3.6.X versions: [3.6.0](https://github.com/apotocki/openssl-iosx/tree/3.6.0)
+
 Supported 3.5.X versions: [3.5.4](https://github.com/apotocki/openssl-iosx/tree/3.5.4), [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
 
 Supported 3.4.X versions: [3.4.3](https://github.com/apotocki/openssl-iosx/tree/3.4.3), [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
@@ -79,9 +81,9 @@ scripts/build.sh -p=ios,iossim-x86_64 --rebuild
 Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.5.3'
+    pod 'openssl-iosx', '~> 3.6.0'
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.5.3.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.6.0.0'
 ```    
 install new dependency:
 ```
