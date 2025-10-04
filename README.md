@@ -1,10 +1,10 @@
 
 ## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
-Supported version: 3.0.17
+Supported version: 3.0.18
 
 This repository provides a universal script for building static OpenSSL libraries for use in iOS, watchOS, tvOS, visionOS, and macOS & Catalyst applications.
-The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.0.17'
+The actual library version is taken from https://github.com/openssl/openssl with tag 'openssl-3.0.18'
 
 # Prerequisites
 
@@ -29,7 +29,7 @@ The actual library version is taken from https://github.com/openssl/openssl with
 # Build Manually
 ```
     # clone the repo
-    git clone -b 3.0.17 https://github.com/apotocki/openssl-iosx
+    git clone -b 3.0.18 https://github.com/apotocki/openssl-iosx
     
     # build libraries
     cd openssl-iosx
@@ -64,9 +64,9 @@ scripts/build.sh -p=ios,iossim-x86_64 --rebuild
 Add the following lines into your project's Podfile:
 ```
     use_frameworks!
-    pod 'openssl-iosx', '~> 3.0.17' 
+    pod 'openssl-iosx', '~> 3.0.18' 
     # or optionally more precisely
-    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.0.17.0'
+    # pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.0.18.0'
 ```    
 install new dependency:
 ```
