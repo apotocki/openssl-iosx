@@ -1,7 +1,7 @@
 
 ## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
-Supported 3.5.X versions: [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
+Supported 3.5.X versions: [3.5.4](https://github.com/apotocki/openssl-iosx/tree/3.5.4), [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
 
 Supported 3.4.X versions: [3.4.3](https://github.com/apotocki/openssl-iosx/tree/3.4.3), [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
 
