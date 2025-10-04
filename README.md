@@ -1,19 +1,19 @@
 
 ## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
-Supported 3.5.X versions: 3.5.3, 3.5.2, 3.5.1, 3.5.0
+Supported 3.5.X versions: [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
 
-Supported 3.4.X versions: 3.4.2, 3.4.1, 3.4.0
+Supported 3.4.X versions: [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
 
-Supported 3.3.X versions: 3.3.4, 3.3.3, 3.3.2, 3.3.1, 3.3.0
+Supported 3.3.X versions: [3.3.4](https://github.com/apotocki/openssl-iosx/tree/3.3.4), [3.3.3](https://github.com/apotocki/openssl-iosx/tree/3.3.3), [3.3.2](https://github.com/apotocki/openssl-iosx/tree/3.3.2), [3.3.1](https://github.com/apotocki/openssl-iosx/tree/3.3.1), [3.3.0](https://github.com/apotocki/openssl-iosx/tree/3.3.0)
 
-Supported 3.2.X versions: 3.2.5, 3.2.4, 3.2.3, 3.2.2, 3.2.1, 3.2.0
+Supported 3.2.X versions: [3.2.6](https://github.com/apotocki/openssl-iosx/tree/3.2.6), [3.2.5](https://github.com/apotocki/openssl-iosx/tree/3.2.5), [3.2.4](https://github.com/apotocki/openssl-iosx/tree/3.2.4), [3.2.3](https://github.com/apotocki/openssl-iosx/tree/3.2.3), [3.2.2](https://github.com/apotocki/openssl-iosx/tree/3.2.2), [3.2.1](https://github.com/apotocki/openssl-iosx/tree/3.2.1), [3.2.0](https://github.com/apotocki/openssl-iosx/tree/3.2.0)
 
-Supported 3.1.X versions: 3.1.8, 3.1.7, 3.1.6, 3.1.5, 3.1.4, 3.1.3, 3.1.2, 3.1.1, 3.1.0
+Supported 3.1.X versions: [3.1.8](https://github.com/apotocki/openssl-iosx/tree/3.1.8), [3.1.7](https://github.com/apotocki/openssl-iosx/tree/3.1.7), [3.1.6](https://github.com/apotocki/openssl-iosx/tree/3.1.6), [3.1.5](https://github.com/apotocki/openssl-iosx/tree/3.1.5), [3.1.4](https://github.com/apotocki/openssl-iosx/tree/3.1.4), [3.1.3](https://github.com/apotocki/openssl-iosx/tree/3.1.3), [3.1.2](https://github.com/apotocki/openssl-iosx/tree/3.1.2), [3.1.1](https://github.com/apotocki/openssl-iosx/tree/3.1.1), [3.1.0](https://github.com/apotocki/openssl-iosx/tree/3.1.0)
 
-Supported 3.0.X versions: 3.0.18, 3.0.17, 3.0.16, 3.0.15, 3.0.14, 3.0.13, 3.0.12, 3.0.11, 3.0.10, 3.0.9, 3.0.8, 3.0.8, 3.0.7
+Supported 3.0.X versions: [3.0.18](https://github.com/apotocki/openssl-iosx/tree/3.0.18), [3.0.17](https://github.com/apotocki/openssl-iosx/tree/3.0.17), [3.0.16](https://github.com/apotocki/openssl-iosx/tree/3.0.16), [3.0.15](https://github.com/apotocki/openssl-iosx/tree/3.0.15), [3.0.14](https://github.com/apotocki/openssl-iosx/tree/3.0.14), [3.0.13](https://github.com/apotocki/openssl-iosx/tree/3.0.13), [3.0.12](https://github.com/apotocki/openssl-iosx/tree/3.0.12), [3.0.11](https://github.com/apotocki/openssl-iosx/tree/3.0.11), [3.0.10](https://github.com/apotocki/openssl-iosx/tree/3.0.10), [3.0.9](https://github.com/apotocki/openssl-iosx/tree/3.0.9), [3.0.8](https://github.com/apotocki/openssl-iosx/tree/3.0.8), [3.0.8](https://github.com/apotocki/openssl-iosx/tree/3.0.8), [3.0.7](https://github.com/apotocki/openssl-iosx/tree/3.0.7)
 
-Supported 1.1.1X versions: 1.1.1w, 1.1.1v, 1.1.1u, 1.1.1t, 1.1.1s, 1.1.1q, 1.1.1p, 1.1.1o, 1.1.1n, 1.1.1m, 1.1.1l, 1.1.1k, 1.1.1j, 1.1.1i
+Supported 1.1.1X versions: [1.1.1w](https://github.com/apotocki/openssl-iosx/tree/1.1.1w), [1.1.1v](https://github.com/apotocki/openssl-iosx/tree/1.1.1v), [1.1.1u](https://github.com/apotocki/openssl-iosx/tree/1.1.1u), [1.1.1t](https://github.com/apotocki/openssl-iosx/tree/1.1.1t), [1.1.1s](https://github.com/apotocki/openssl-iosx/tree/1.1.1s), [1.1.1q](https://github.com/apotocki/openssl-iosx/tree/1.1.1q), [1.1.1p](https://github.com/apotocki/openssl-iosx/tree/1.1.1p), [1.1.1o](https://github.com/apotocki/openssl-iosx/tree/1.1.1o), [1.1.1n](https://github.com/apotocki/openssl-iosx/tree/1.1.1n), [1.1.1m](https://github.com/apotocki/openssl-iosx/tree/1.1.1m), [1.1.1l](https://github.com/apotocki/openssl-iosx/tree/1.1.1l), [1.1.1k](https://github.com/apotocki/openssl-iosx/tree/1.1.1k), [1.1.1j](https://github.com/apotocki/openssl-iosx/tree/1.1.1j), [1.1.1i](https://github.com/apotocki/openssl-iosx/tree/1.1.1i)
 
 
 Use the appropriate tag or branch to choose a version.
