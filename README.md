@@ -43,6 +43,8 @@ The actual library version is taken from https://github.com/openssl/openssl with
    /Applications/Xcode.app/Contents/Developer/Platforms
 ```
 
+4. Install cmake. Requires cmake 3.x (will not work with cmake 4.0 or higher). Compatible versions can be downloaded from [cmake.org](https://cmake.org/download/#older)
+
 # Build Manually
 ```
     # clone the repo
