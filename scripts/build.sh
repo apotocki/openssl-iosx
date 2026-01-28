@@ -6,7 +6,7 @@ set -euo pipefail
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=openssl-3.6.0
+OPENSSL_VER=openssl-3.6.1
 MACOSX_VERSION_ARM=12.3
 MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4
@@ -91,7 +91,7 @@ BUILD_PLATFORMS=" ${BUILD_PLATFORMS//,/ } "
 for i in $BUILD_PLATFORMS; do :;
 if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
     echo "Unknown platform '$i'"
-    exi1 1
+    exit 1
 fi
 done
 
