@@ -91,7 +91,7 @@ BUILD_PLATFORMS=" ${BUILD_PLATFORMS//,/ } "
 for i in $BUILD_PLATFORMS; do :;
 if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
     echo "Unknown platform '$i'"
-    exi1 1
+    exit 1
 fi
 done
 
