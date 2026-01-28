@@ -35,7 +35,7 @@ Supported OpenSSL 3.6.x upstream versions: [3.6.0](https://github.com/apotocki/o
 
 Supported OpenSSL 3.5.x upstream versions: [3.5.4](https://github.com/apotocki/openssl-iosx/tree/3.5.4), [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
 
-Supported OpenSSL 3.4.x upstream versions: [3.4.3](https://github.com/apotocki/openssl-iosx/tree/3.4.3), [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
+Supported OpenSSL 3.4.x upstream versions: [3.4.4](https://github.com/apotocki/openssl-iosx/tree/3.4.4), [3.4.3](https://github.com/apotocki/openssl-iosx/tree/3.4.3), [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
 
 Supported OpenSSL 3.3.x upstream versions: [3.3.6](https://github.com/apotocki/openssl-iosx/tree/3.3.6), [3.3.5](https://github.com/apotocki/openssl-iosx/tree/3.3.5), [3.3.4](https://github.com/apotocki/openssl-iosx/tree/3.3.4), [3.3.3](https://github.com/apotocki/openssl-iosx/tree/3.3.3), [3.3.2](https://github.com/apotocki/openssl-iosx/tree/3.3.2), [3.3.1](https://github.com/apotocki/openssl-iosx/tree/3.3.1), [3.3.0](https://github.com/apotocki/openssl-iosx/tree/3.3.0)
 
@@ -238,7 +238,9 @@ Please check out my iOS application on the App Store:
 <table align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
-      <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">
+        <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      </a>
     </td>
     <td>
       <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
