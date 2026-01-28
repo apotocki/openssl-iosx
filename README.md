@@ -33,7 +33,7 @@ Both Intel (`x86_64`) and Apple Silicon (`arm64`) architectures are supported wh
 
 Supported OpenSSL 3.6.x upstream versions: [3.6.0](https://github.com/apotocki/openssl-iosx/tree/3.6.0)
 
-Supported OpenSSL 3.5.x upstream versions: [3.5.4](https://github.com/apotocki/openssl-iosx/tree/3.5.4), [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
+Supported OpenSSL 3.5.x upstream versions: [3.5.5](https://github.com/apotocki/openssl-iosx/tree/3.5.5), [3.5.4](https://github.com/apotocki/openssl-iosx/tree/3.5.4), [3.5.3](https://github.com/apotocki/openssl-iosx/tree/3.5.3), [3.5.2](https://github.com/apotocki/openssl-iosx/tree/3.5.2), [3.5.1](https://github.com/apotocki/openssl-iosx/tree/3.5.1), [3.5.0](https://github.com/apotocki/openssl-iosx/tree/3.5.0)
 
 Supported OpenSSL 3.4.x upstream versions: [3.4.4](https://github.com/apotocki/openssl-iosx/tree/3.4.4), [3.4.3](https://github.com/apotocki/openssl-iosx/tree/3.4.3), [3.4.2](https://github.com/apotocki/openssl-iosx/tree/3.4.2), [3.4.1](https://github.com/apotocki/openssl-iosx/tree/3.4.1), [3.4.0](https://github.com/apotocki/openssl-iosx/tree/3.4.0)
 
