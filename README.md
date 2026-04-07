@@ -1,7 +1,7 @@
 
-## OpenSSL 3.4.4 for Apple Platforms
+## OpenSSL 3.4.5 for Apple Platforms
 
-This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.4.4 release**.
+This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.4.5 release**.
 
 This repository **does not contain precompiled OpenSSL binaries**.  
 Precompiled artifacts are published separately via **GitHub Releases**.
@@ -12,7 +12,7 @@ The OpenSSL source code is fetched from the official upstream repository:
 
 [https://github.com/openssl/openssl](https://github.com/openssl/openssl)
 
-using the corresponding upstream tag (for example `openssl-3.4.4`).
+using the corresponding upstream tag (for example `openssl-3.4.5`).
 
 ---
 
@@ -62,7 +62,7 @@ Both Intel (`x86_64`) and Apple Silicon (`arm64`) architectures are supported wh
 
 ```bash
 # clone the repository at the required OpenSSL version
-git clone -b 3.4.4 https://github.com/apotocki/openssl-iosx
+git clone -b 3.4.5 https://github.com/apotocki/openssl-iosx
 
 # build libraries
 cd openssl-iosx
@@ -119,10 +119,10 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'openssl-iosx', '~> 3.4.4'
+pod 'openssl-iosx', '~> 3.4.5'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.4.4.0
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.4.4.0'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.4.5.0
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.4.5.0'
 ```
 
 Then install the dependency:
@@ -137,7 +137,7 @@ pod install --verbose
 
 All binaries for this branch are built automatically using **GitHub Actions** and published via **GitHub Releases**.
 
-The presence of a GitHub Release for this OpenSSL version indicates a successful CI build for 3.4.4.
+The presence of a GitHub Release for this OpenSSL version indicates a successful CI build for 3.4.5.
 
 ---
 
@@ -155,7 +155,7 @@ Support is provided via **GitHub Issues**.
 
 When reporting a problem, please include:
 
-* OpenSSL version: 3.4.4
+* OpenSSL version: 3.4.5
 * Target platform(s)
 * Build command and environment details
 
