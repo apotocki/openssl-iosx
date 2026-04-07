@@ -1,7 +1,7 @@
 
-## OpenSSL 3.3.6 for Apple Platforms
+## OpenSSL 3.3.7 for Apple Platforms
 
-This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.3.6 release**.
+This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.3.7 release**.
 
 This repository **does not contain precompiled OpenSSL binaries**.  
 Precompiled artifacts are published separately via **GitHub Releases**.
@@ -12,7 +12,7 @@ The OpenSSL source code is fetched from the official upstream repository:
 
 [https://github.com/openssl/openssl](https://github.com/openssl/openssl)
 
-using the corresponding upstream tag (for example `openssl-3.3.6`).
+using the corresponding upstream tag (for example `openssl-3.3.7`).
 
 ---
 
@@ -62,7 +62,7 @@ Both Intel (`x86_64`) and Apple Silicon (`arm64`) architectures are supported wh
 
 ```bash
 # clone the repository at the required OpenSSL version
-git clone -b 3.3.6 https://github.com/apotocki/openssl-iosx
+git clone -b 3.3.7 https://github.com/apotocki/openssl-iosx
 
 # build libraries
 cd openssl-iosx
@@ -119,10 +119,10 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'openssl-iosx', '~> 3.3.6'
+pod 'openssl-iosx', '~> 3.3.7'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.3.6.0
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.3.6.0'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.3.7.0
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.3.7.0'
 ```
 
 Then install the dependency:
@@ -137,7 +137,7 @@ pod install --verbose
 
 All binaries for this branch are built automatically using **GitHub Actions** and published via **GitHub Releases**.
 
-The presence of a GitHub Release for this OpenSSL version indicates a successful CI build for 3.3.6.
+The presence of a GitHub Release for this OpenSSL version indicates a successful CI build for 3.3.7.
 
 ---
 
@@ -155,7 +155,7 @@ Support is provided via **GitHub Issues**.
 
 When reporting a problem, please include:
 
-* OpenSSL version: 3.3.6
+* OpenSSL version: 3.3.7
 * Target platform(s)
 * Build command and environment details
 
@@ -178,7 +178,9 @@ Please check out my iOS application on the App Store:
 <table align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td>
-      <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">
+        <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      </a>
     </td>
     <td>
       <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
