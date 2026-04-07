@@ -1,7 +1,7 @@
 
-## OpenSSL 3.0.19 for Apple Platforms
+## OpenSSL 3.0.20 for Apple Platforms
 
-This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **official OpenSSL 3.0.19 release**.
+This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.0.20 release**.
 
 This repository **does not contain precompiled OpenSSL binaries**.  
 Precompiled artifacts are published separately via **GitHub Releases**.
@@ -12,7 +12,7 @@ The OpenSSL source code is fetched from the official upstream repository:
 
 [https://github.com/openssl/openssl](https://github.com/openssl/openssl)
 
-using the corresponding upstream tag (for example `openssl-3.0.19`).
+using the corresponding upstream tag (for example `openssl-3.0.20`).
 
 ---
 
@@ -40,22 +40,21 @@ Both Intel (`x86_64`) and Apple Silicon (`arm64`) architectures are supported wh
    The `xcode-select -p` command must point to the Xcode developer directory (for example `/Applications/Xcode.app/Contents/Developer`).
    If it points to the Command Line Tools directory, reset it using one of the following commands:
 
-```bash
-sudo xcode-select --reset
-```
-
+   ```bash
+   sudo xcode-select --reset
+   ```
    or
 
-```bash
-sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
-```
+   ```bash
+   sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+   ```
 
 3. **Install Required SDKs**
    To build for tvOS, watchOS, visionOS, and their simulators, make sure the corresponding SDKs are installed in:
 
-```
-/Applications/Xcode.app/Contents/Developer/Platforms
-```
+   ```
+   /Applications/Xcode.app/Contents/Developer/Platforms
+   ```
 
 ---
 
@@ -63,7 +62,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 ```bash
 # clone the repository at the required OpenSSL version
-git clone -b 3.0.19 https://github.com/apotocki/openssl-iosx
+git clone -b 3.0.20 https://github.com/apotocki/openssl-iosx
 
 # build libraries
 cd openssl-iosx
@@ -114,15 +113,16 @@ scripts/build.sh -p=ios,iossim-x86_64 --rebuild
 
 ## Build Using CocoaPods
 
-This branch can be integrated using CocoaPods with a version pinned to the current OpenSSL release.
+This branch can be integrated using CocoaPods with a version pinned to this OpenSSL version.
 
 Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'openssl-iosx', '~> 3.0.19'
+pod 'openssl-iosx', '~> 3.0.20'
 # or pin to a specific tag
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.0.19.0'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.0.20.0
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.0.20.0'
 ```
 
 Then install the dependency:
@@ -137,7 +137,7 @@ pod install --verbose
 
 All binaries for this branch are built automatically using **GitHub Actions** and published via **GitHub Releases**.
 
-The presence of a GitHub Release for this branch indicates a successful CI build for OpenSSL 3.0.19.
+The presence of a GitHub Release for this OpenSSL version indicates a successful CI build for 3.0.20.
 
 ---
 
@@ -155,7 +155,7 @@ Support is provided via **GitHub Issues**.
 
 When reporting a problem, please include:
 
-* OpenSSL version: 3.0.19
+* OpenSSL version: 3.0.20
 * Target platform(s)
 * Build command and environment details
 
@@ -163,17 +163,31 @@ When reporting a problem, please include:
 
 ## License
 
-This repository distributes OpenSSL binaries under the terms of the **OpenSSL License**.
+This repository contains build scripts for OpenSSL.
 
-Ensure compliance with the upstream OpenSSL licensing requirements when redistributing these binaries.
+Precompiled artifacts published via GitHub Releases are provided for convenience and are subject to the upstream OpenSSL license terms for the corresponding version (for example, OpenSSL 3.x is licensed under the Apache License 2.0).
+
+When using or redistributing OpenSSL source code or binaries, ensure compliance with the upstream OpenSSL licensing requirements for the specific version.
 
 ---
 
-## As an advertisement…
+## As an advertisement...
 
 Please check out my iOS application on the App Store:
 
-[<table align="center" border=0 cellspacing=0 cellpadding=0><tr><td><img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70"/></td><td><a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br>HEX File Viewer & Editor</td><tr></table>]()
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">
+        <img src="https://is4-ssl.mzstatic.com/image/thumb/Purple112/v4/78/d6/f8/78d6f802-78f6-267a-8018-751111f52c10/AppIcon-0-1x_U007emarketing-0-10-0-85-220.png/460x0w.webp" width="70" />
+      </a>
+    </td>
+    <td>
+      <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
+      HEX File Viewer &amp; Editor
+    </td>
+  </tr>
+</table>
 
 PotoHEX is designed for viewing and editing files at the byte or character level, calculating hashes, encoding/decoding data, and compressing/decompressing selected byte ranges.
 
