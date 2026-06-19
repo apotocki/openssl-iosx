@@ -31,7 +31,7 @@ Both Intel (`x86_64`) and Apple Silicon (`arm64`) architectures are supported wh
 
 ## Supported OpenSSL Versions
 
-Supported OpenSSL 4.0.x upstream versions: [4.0.0](https://github.com/apotocki/openssl-iosx/tree/4.0.0)
+Supported OpenSSL 4.0.x upstream versions: [4.0.1](https://github.com/apotocki/openssl-iosx/tree/4.0.1), [4.0.0](https://github.com/apotocki/openssl-iosx/tree/4.0.0)
 
 Supported OpenSSL 3.6.x upstream versions: [3.6.3](https://github.com/apotocki/openssl-iosx/tree/3.6.3), [3.6.2](https://github.com/apotocki/openssl-iosx/tree/3.6.2), [3.6.1](https://github.com/apotocki/openssl-iosx/tree/3.6.1), [3.6.0](https://github.com/apotocki/openssl-iosx/tree/3.6.0)
 
@@ -164,10 +164,10 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'openssl-iosx', '~> 4.0.0'
+pod 'openssl-iosx', '~> 4.0.1'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.0.0
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.0.0'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.1.0
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.1.0'
 ```    
 
 Then install the dependency:
