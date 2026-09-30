@@ -6,9 +6,9 @@ Pod::Spec.new do |s|
     s.license      = "Apache"
     s.author       = { "Alexander Pototskiy" => "alex.a.potocki@gmail.com" }
     s.social_media_url = "https://www.linkedin.com/in/alexander-pototskiy"
-    s.ios.deployment_target = "13.4"
-    s.osx.deployment_target = "11.0"
-    s.tvos.deployment_target = "13.0"
+    s.ios.deployment_target = "15.0"
+    s.osx.deployment_target = "12.0"
+    s.tvos.deployment_target = "15.0"
     s.watchos.deployment_target = "11.0"
     s.visionos.deployment_target = "1.0"
     s.ios.pod_target_xcconfig = { 'ONLY_ACTIVE_ARCH' => 'YES' }
