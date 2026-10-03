@@ -224,7 +224,8 @@ fi
 macosx_build $HOST_ARC "$NATIVE_BUILD_FLAGS"
 if [[ ! -d $BUILD_DIR/macosx-native ]]; then
     pushd $BUILD_DIR/build.macosx.$HOST_ARC
-    make install
+    # install_sw: libraries and headers only, without generating the documentation
+    make install_sw
     popd
 fi
     
