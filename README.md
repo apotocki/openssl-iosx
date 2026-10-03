@@ -121,8 +121,8 @@ Add the following to your `Podfile`:
 use_frameworks!
 pod 'openssl-iosx', '~> 4.0.3'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.3.0
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.3.0'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.3.1
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.3.1'
 ```
 
 Then install the dependency:
