@@ -242,27 +242,31 @@ fi
 [[ "$BUILD_PLATFORMS" == *"tvos "* ]] && generic_build tvos arm64 tvos-xcrun "-fembed-bitcode -target arm64-apple-tvos$TVOS_VERSION"
 [[ "$BUILD_PLATFORMS" == *"watchos "* ]] && generic_build watchos arm64 watchos-xcrun "-fembed-bitcode -target arm64-apple-watchos$WATCHOS_VERSION"
 
+# the headers go into one XCFramework only: Xcode copies the headers of every linked
+# XCFramework into one directory and fails on duplicates ("Multiple commands produce")
 build_xcframework()
 {
     LIBARGS=
-    [[ "$BUILD_PLATFORMS" == *macosx* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.macosx/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *catalyst* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.catalyst/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *iossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.iossim/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *xrossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.xrossim/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *tvossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.tvossim/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *watchossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.watchossim/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"ios "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.ios.arm64/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"xros "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.xros.arm64/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"tvos "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.tvos.arm64/lib$1.a"
-    [[ "$BUILD_PLATFORMS" == *"watchos "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.watchos.arm64/lib$1.a"
+    HEADER_ARGS=
+    [[ $1 == crypto ]] && HEADER_ARGS="-headers $BUILD_DIR/frameworks/Headers"
+    [[ "$BUILD_PLATFORMS" == *macosx* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.macosx/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *catalyst* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.catalyst/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *iossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.iossim/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *xrossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.xrossim/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *tvossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.tvossim/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *watchossim* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.watchossim/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"ios "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.ios.arm64/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"xros "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.xros.arm64/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"tvos "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.tvos.arm64/lib$1.a $HEADER_ARGS"
+    [[ "$BUILD_PLATFORMS" == *"watchos "* ]] && LIBARGS="$LIBARGS -library $BUILD_DIR/build.watchos.arm64/lib$1.a $HEADER_ARGS"
 
     xcodebuild -create-xcframework $LIBARGS -output $BUILD_DIR/frameworks/$1.xcframework
 }
 
 [[ -d $BUILD_DIR/frameworks ]] && rm -rf $BUILD_DIR/frameworks
 mkdir -p $BUILD_DIR/frameworks
+# the install prefix has the complete public headers; the build tree has only the generated ones
+cp -R $BUILD_DIR/macosx-native/include $BUILD_DIR/frameworks/Headers
 for i in $LIBS_TO_BUILD; do :;
     build_xcframework $i
 done
-
-cp -R $BUILD_DIR/build.macosx.$HOST_ARC/include $BUILD_DIR/frameworks/Headers
