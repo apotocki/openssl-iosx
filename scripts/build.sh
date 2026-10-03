@@ -6,7 +6,7 @@ set -euo pipefail
 THREAD_COUNT=$(sysctl hw.ncpu | awk '{print $2}')
 HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
-OPENSSL_VER=openssl-3.6.4
+OPENSSL_VER=openssl-3.6.5
 MACOSX_VERSION_ARM=12.3
 MACOSX_VERSION_X86_64=10.13
 IOS_VERSION=13.4
@@ -95,9 +95,13 @@ if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
 fi
 done
 
-if [[ ! -d $OPENSSL_VER ]]; then
+# An interrupted clone can leave a directory with .git but an incomplete work tree,
+# so validate the files we need and clone into a temporary directory renamed on success.
+if [[ ! -f $OPENSSL_VER/Configure || ! -f $OPENSSL_VER/Configurations/15-ios.conf ]]; then
 	echo downloading $OPENSSL_VER ...
-	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER
+	rm -rf $OPENSSL_VER $OPENSSL_VER.download
+	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER.download
+	mv $OPENSSL_VER.download $OPENSSL_VER
 fi
 
 echo patching openssl...
