@@ -95,9 +95,13 @@ if [[ ! ",$BUILD_PLATFORMS_ALL," == *",$i,"* ]]; then
 fi
 done
 
-if [[ ! -d $OPENSSL_VER ]]; then
+# An interrupted clone can leave a directory with .git but an incomplete work tree,
+# so validate the files we need and clone into a temporary directory renamed on success.
+if [[ ! -f $OPENSSL_VER/Configure || ! -f $OPENSSL_VER/Configurations/15-ios.conf ]]; then
 	echo downloading $OPENSSL_VER ...
-	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER
+	rm -rf $OPENSSL_VER $OPENSSL_VER.download
+	git clone --depth 1 -b $OPENSSL_VER https://github.com/openssl/openssl $OPENSSL_VER.download
+	mv $OPENSSL_VER.download $OPENSSL_VER
 fi
 
 echo patching openssl...
