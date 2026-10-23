@@ -2,6 +2,7 @@ Pod::Spec.new do |s|
     s.name         = "openssl-iosx"
     s.version      = "4.1.0.0"
     s.summary      = "OpenSSL XCFrameworks for macOS, iOS, watchOS, tvOS, and visionOS, including Mac Catalyst and simulators."
+    s.description  = "OpenSSL XCFrameworks for macOS, iOS, watchOS, tvOS, and visionOS, including Mac Catalyst and simulators. New versions are published to the apotocki/cocoapods-specs spec repo (https://github.com/apotocki/cocoapods-specs), because CocoaPods Trunk becomes read-only on December 2, 2026: add :source => 'https://github.com/apotocki/cocoapods-specs.git' to the pod in your Podfile."
     s.homepage     = "https://github.com/apotocki/openssl-iosx"
     s.license      = "Apache"
     s.author       = { "Alexander Pototskiy" => "alex.a.potocki@gmail.com" }
