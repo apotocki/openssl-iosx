@@ -119,11 +119,13 @@ Add the following to your `Podfile`:
 
 ```ruby
 use_frameworks!
-pod 'openssl-iosx', '~> 3.4.8'
+pod 'openssl-iosx', '~> 3.4.8', :source => 'https://github.com/apotocki/cocoapods-specs.git'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.4.8.2
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.4.8.2'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 3.4.8.3
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '3.4.8.3'
 ```
+
+New versions are published to the [apotocki/cocoapods-specs](https://github.com/apotocki/cocoapods-specs) spec repo, because CocoaPods Trunk becomes read-only on December 2, 2026; `:source` makes CocoaPods take the pod from there.
 
 Then install the dependency:
 
@@ -173,7 +175,7 @@ When using or redistributing OpenSSL source code or binaries, ensure compliance 
 
 ## As an advertisement...
 
-Please check out my iOS application on the App Store:
+Please check out my applications:
 
 <table align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -184,14 +186,29 @@ Please check out my iOS application on the App Store:
     </td>
     <td>
       <a href="https://apps.apple.com/us/app/potohex/id1620963302">PotoHEX</a><br />
-      HEX File Viewer &amp; Editor
+      HEX File Viewer &amp; Editor<br />
+      iOS &middot; App Store
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://play.google.com/store/apps/details?id=com.potohex">
+        <img src="https://play-lh.googleusercontent.com/we6L4zSvYH6K8K19sN7A1aS2Mlkp2kxWN-QSna0vHJEioxFB-dfMGUBUG2m6Bg-VqLaX50_PcgdyJd45A4z8ew=s140" width="70" />
+      </a>
+    </td>
+    <td>
+      <a href="https://play.google.com/store/apps/details?id=com.potohex">Otok Hex</a><br />
+      HEX File Viewer<br />
+      Android &middot; Google Play
     </td>
   </tr>
 </table>
 
 PotoHEX is designed for viewing and editing files at the byte or character level, calculating hashes, encoding/decoding data, and compressing/decompressing selected byte ranges.
 
-If you find this project useful, you can support my open-source work by trying the [App](https://apps.apple.com/us/app/potohex/id1620963302).
+Otok Hex lets you inspect any file's bytes in hex and text on Android, with Wi-Fi access to the files from your PC.
+
+If you find this project useful, you can support my open-source work by trying [PotoHEX](https://apps.apple.com/us/app/potohex/id1620963302) on the App Store or [Otok Hex](https://play.google.com/store/apps/details?id=com.potohex) on Google Play.
 
 ---
 
