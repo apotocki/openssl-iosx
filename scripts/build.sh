@@ -8,12 +8,12 @@ HOST_ARC=$( uname -m )
 XCODE_ROOT=$( xcode-select -print-path )
 OPENSSL_VER=openssl-3.0.22
 MACOSX_VERSION_ARM=12.3
-MACOSX_VERSION_X86_64=10.13
-IOS_VERSION=13.4
-IOS_SIM_VERSION=13.4
-CATALYST_VERSION=13.4
-TVOS_VERSION=13.0
-TVOS_SIM_VERSION=13.0
+MACOSX_VERSION_X86_64=12.0
+IOS_VERSION=15.0
+IOS_SIM_VERSION=15.0
+CATALYST_VERSION=15.0
+TVOS_VERSION=15.0
+TVOS_SIM_VERSION=15.0
 WATCHOS_VERSION=11.0
 WATCHOS_SIM_VERSION=11.0
 ################## SETUP END
@@ -224,7 +224,8 @@ fi
 macosx_build $HOST_ARC "$NATIVE_BUILD_FLAGS"
 if [[ ! -d $BUILD_DIR/macosx-native ]]; then
     pushd $BUILD_DIR/build.macosx.$HOST_ARC
-    make install
+    # install_sw: libraries and headers only, without generating the documentation
+    make install_sw
     popd
 fi
     
