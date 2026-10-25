@@ -30,6 +30,7 @@ Pod::Spec.new do |s|
     s.public_header_files = "frameworks/Headers/**/*.{h,H,c}"
     s.source_files = "frameworks/Headers/**/*.{h,H,c}"
     s.vendored_frameworks = "frameworks/ssl.xcframework", "frameworks/crypto.xcframework", "frameworks/apps.xcframework"
+    s.resource_bundles = { "openssl-iosx_privacy" => ["PrivacyInfo.xcprivacy"] }
         
     #s.preserve_paths = "frameworks/**/*"
 end
