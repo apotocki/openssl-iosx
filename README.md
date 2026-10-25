@@ -121,8 +121,8 @@ Add the following to your `Podfile`:
 use_frameworks!
 pod 'openssl-iosx', '~> 4.0.3', :source => 'https://github.com/apotocki/cocoapods-specs.git'
 # or pin to a specific tag
-# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.3.4
-# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.3.4'
+# tags are formatted as <openssl_version>.<package_patch>, e.g. 4.0.3.5
+# pod 'openssl-iosx', :git => 'https://github.com/apotocki/openssl-iosx', :tag => '4.0.3.5'
 ```
 
 New versions are published to the [apotocki/cocoapods-specs](https://github.com/apotocki/cocoapods-specs) spec repo, because CocoaPods Trunk becomes read-only on December 2, 2026; `:source` makes CocoaPods take the pod from there.
