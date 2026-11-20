@@ -1,6 +1,8 @@
 
 ## OpenSSL for iOS, watchOS, tvOS, visionOS, macOS, Catalyst, Simulators - Intel(x86_64) / Apple Silicon(arm64)
 
+> **OpenSSL is now available through [otok](https://otok-dev.github.io/)**, which builds it from source on your machine for the platforms of your app: see [Using otok](https://github.com/apotocki/openssl-iosx/blob/master/README.md#using-otok-recommended) in the `master` branch. otok provides the current versions of OpenSSL; this branch keeps the build scripts of OpenSSL 3.0.17.
+
 Supported version: 3.0.17
 
 This repository provides a universal script for building static OpenSSL libraries for use in iOS, watchOS, tvOS, visionOS, and macOS & Catalyst applications.
