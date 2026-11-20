@@ -1,6 +1,8 @@
 
 # openssl-iosx
 
+> **Now available through [otok](https://otok-dev.github.io/).** otok builds OpenSSL from source on your machine, for the platforms of your app, and hands the result to Xcode as a local Swift package: see [Using otok](#using-otok-recommended). The build scripts and the CocoaPods pod described below remain available.
+
 ## Overview
 
 `openssl-iosx` is a build and distribution project that produces **precompiled OpenSSL static libraries packaged as XCFrameworks** for Apple platforms.
@@ -75,6 +77,38 @@ The actual OpenSSL source code is fetched from the official upstream repository:
 [https://github.com/openssl/openssl](https://github.com/openssl/openssl)
 
 using the corresponding upstream tag (for example `OpenSSL_1_1_1w` or `openssl-3.2.1`).
+
+---
+
+## Using otok (recommended)
+
+[otok](https://otok-dev.github.io/) builds OpenSSL from source on your machine, with your Xcode, for the platforms and deployment versions of your app, and gives the result to Xcode as a local Swift package of XCFrameworks. Install it (`brew install otok-dev/tap/otok`) and put an `otok.toml` next to your Xcode project:
+
+```toml
+[otok]
+format = 1
+
+[apple]
+platforms = ["ios", "iossim", "macosx"]
+deployment = { ios = "16.0", macos = "13.0" }
+
+[deps.openssl]
+recipe = "apotocki/openssl"
+version = "~> 4.1"
+```
+
+```bash
+otok install
+```
+
+Then add the `Otok` directory to your app in Xcode (**File → Add Package Dependencies… → Add Local…**) and add the product `OpenSSL` (Clang module `COpenSSL`) to your target.
+
+- The index has OpenSSL 3.5, 3.6, 4.0 and 4.1. A constraint keeps you on one series: `~> 3.5.0` means `>= 3.5.0, < 3.6` (while `~> 3.5` would take 3.6). `otok update openssl` moves to the newest version the constraint allows.
+- `options = { no-deprecated = true }` configures OpenSSL with `no-deprecated` and defines `OPENSSL_NO_DEPRECATED` for your code.
+- The privacy manifest of OpenSSL comes with the product.
+- `platforms` takes `ios`, `iossim`, `macosx`, `catalyst`, `tvos`, `tvossim`, `watchos`, `watchossim`, `xros`, `xrossim`; `deployment` gives the minimum OS versions (`ios`, `macos`, `catalyst`, `tvos`, `watchos`, `visionos`) and is required for every platform built.
+- `otok.lock` pins the versions, the recipes and the sources by their hashes: commit it with `otok.toml`. `Otok/` is generated: add it to `.gitignore`.
+- The same recipe builds OpenSSL for Android, Windows and Linux too. Its versions and options are in the [catalog](https://otok-dev.github.io/index/recipes/apotocki/openssl/) (or `otok info apotocki/openssl`); moving from the pod is described in [Coming from CocoaPods](https://otok-dev.github.io/start/from-cocoapods/).
 
 ---
 
