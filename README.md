@@ -1,6 +1,8 @@
 
 ## OpenSSL 3.0.21 for Apple Platforms
 
+> **OpenSSL is now available through [otok](https://otok-dev.github.io/)**, which builds it from source on your machine for the platforms of your app: see [Using otok](https://github.com/apotocki/openssl-iosx/blob/master/README.md#using-otok-recommended) in the `master` branch. otok provides the current versions of OpenSSL; this branch keeps the build scripts of OpenSSL 3.0.21.
+
 This branch contains build scripts for producing OpenSSL static libraries packaged as XCFrameworks for Apple platforms, based on the **upstream OpenSSL 3.0.21 release**.
 
 This repository **does not contain precompiled OpenSSL binaries**.  
